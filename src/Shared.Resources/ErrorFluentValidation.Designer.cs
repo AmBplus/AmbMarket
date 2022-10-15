@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Resourses {
+namespace Shared.Resources {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Resourses {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("KalaMarket.Resourses.ErrorFluentValidation", typeof(ErrorFluentValidation).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Shared.Resources.ErrorFluentValidation", typeof(ErrorFluentValidation).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

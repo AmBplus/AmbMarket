@@ -1,10 +1,17 @@
-﻿namespace Shared.AspCore.Utility
+﻿using Microsoft.AspNetCore.Http;
+
+namespace Shared.AspCore.Utility
 {
     public static class CookiesManger
     {
-        public static void AddCookie(HttpContext context, string token, string value)
+        static CookiesManger()
         {
-            context.Response.Cookies.Append(token, value, GetCookieOptions(context));
+                
+        }
+        public static void AddCookie(HttpContext context, string token, string value , int expDay)
+        {
+            
+            context.Response.Cookies.Append(token, value, GetCookieOptions(context,expDay));
         }
 
         public static bool CookieIsExist(HttpContext context, string token)
@@ -19,10 +26,10 @@
             {
                 return null;
             }
-            return  cookieValue ;
+            return cookieValue;
         }
 
-        public  static void RemoveCookie(HttpContext context, string token)
+        public static void RemoveCookie(HttpContext context, string token)
         {
             if (context.Request.Cookies.ContainsKey(token))
             {
@@ -30,28 +37,22 @@
             }
         }
 
- 
+
         public static Guid GetDeviceIdFromCookie(HttpContext context)
         {
-          string browserId=   GetCookie(context, "DeviceId");
-            if(browserId== null)
-            {
-                string value = Guid.NewGuid().ToString();
-                AddCookie(context, "DeviceId", value);
-                browserId = value;
-            }
+            string browserId = GetCookie(context, "DeviceId");
             Guid guidBowser;
             Guid.TryParse(browserId, out guidBowser);
-            return guidBowser ;
+            return guidBowser;
         }
-        private static CookieOptions GetCookieOptions(HttpContext context)
+        private static CookieOptions GetCookieOptions(HttpContext context,int expDay)
         {
             return new CookieOptions
             {
                 HttpOnly = true,
                 Path = context.Request.PathBase.HasValue ? context.Request.PathBase.ToString() : "/",
                 Secure = context.Request.IsHttps,
-                Expires = DateTime.Now.AddDays(100),
+                Expires = Shared.Utility.Now.AddDays(expDay),
             };
         }
     }

@@ -1,4 +1,7 @@
-﻿namespace Shared.AspCore.CheckContentType;
+﻿using Microsoft.AspNetCore.Http;
+using Myrmec;
+
+namespace Shared.AspCore.CheckContentType;
 
 public static class CheckTypeHelper
 {

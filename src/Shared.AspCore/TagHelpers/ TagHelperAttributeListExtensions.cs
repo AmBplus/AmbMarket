@@ -1,4 +1,5 @@
 ﻿using System.Text.RegularExpressions;
+using Microsoft.AspNetCore.Razor.TagHelpers;
 
 namespace Shared.AspCore.TagHelpers;
 

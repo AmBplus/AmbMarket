@@ -1,4 +1,8 @@
-﻿namespace Shared.AspCore.Utility;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Shared.AspCore.CheckContentType;
+
+namespace Shared.AspCore.Utility;
 
 public static class SaveFileHelper
 {

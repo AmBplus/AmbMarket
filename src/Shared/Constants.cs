@@ -1,8 +1,8 @@
 ﻿namespace Shared
 {
-	public static class KalaMarketConstants
+	public static class Constants
 	{
-		static KalaMarketConstants()
+		static Constants()
 		{
 		}
 		public static class CategoryType

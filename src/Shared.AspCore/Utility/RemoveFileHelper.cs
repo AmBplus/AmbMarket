@@ -1,4 +1,6 @@
-﻿namespace Shared.AspCore.Utility;
+﻿using Microsoft.AspNetCore.Hosting;
+
+namespace Shared.AspCore.Utility;
 
 public static class RemoveFileHelper
 {
