@@ -2,12 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
+    <RootNamespace>_02_Framework.Application</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\01_Framework.Domain\01_Framework.Domain.csproj" />
+    <Folder Include="DbContext\" />
   </ItemGroup>
 
 </Project>

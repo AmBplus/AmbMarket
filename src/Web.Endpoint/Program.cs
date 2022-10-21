@@ -1,5 +1,8 @@
-var builder = WebApplication.CreateBuilder(args);
+using ambMarket.Infrastructure.Utility;
 
+var builder = WebApplication.CreateBuilder(args);
+// WireUp Infrastructure Services
+builder.Services.WireUpInfrastructureServices(builder.Configuration);
 // Add services to the container.
 builder.Services.AddRazorPages();
 
@@ -17,7 +20,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapRazorPages();
