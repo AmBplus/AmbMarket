@@ -9,15 +9,18 @@ public class IdentityDbContext : IdentityDbContext<User>, IIdentityDbContext
 {
     public IdentityDbContext(DbContextOptions<IdentityDbContext> options) :base(options)
     {
-        var user = new User();
+    
     }
     public DbSet<User> Users { get; set; }
     protected override void OnModelCreating(ModelBuilder builder)
     {
-        builder.Entity<User>().Property(x => x.UpdateDate);
-        builder.Entity<User>().Property(x => x.Removed);
-        builder.Entity<User>().Property(x => x.RemovedTime);
-        builder.Entity<User>().Property(x => x.CreateDate);
+        var users = builder.Entity<User>();
+        users.Property(x => x.UpdateDate);
+        users.Property(x => x.Removed);
+        users.Property(x => x.RemovedTime);
+        users.Property(x => x.CreateDate);
+        users.Property(x => x.Name);
+        users.Property(x => x.LastName);
         base.OnModelCreating(builder);
     }
 }
