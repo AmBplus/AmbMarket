@@ -1,4 +1,4 @@
-using ambMarket.Infrastructure.Utility;
+using ambMarket.Infrastructure.Utilities;
 
 var builder = WebApplication.CreateBuilder(args);
 

@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace ambMarket.Infrastructure.IdentityConfig;
+namespace ambMarket.Infrastructure.ConfigurationServices.Identity;
 
 public static class UserConfig
 {

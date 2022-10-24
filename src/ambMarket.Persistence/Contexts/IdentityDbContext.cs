@@ -1,4 +1,4 @@
-﻿using ambMarket.Application.Interfaces;
+﻿using ambMarket.Application.Interfaces.Databases;
 using ambMarket.Domain.userAggregate;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;

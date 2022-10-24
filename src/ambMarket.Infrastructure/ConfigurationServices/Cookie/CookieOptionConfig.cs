@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace ambMarket.Infrastructure.CookieConfig;
+namespace ambMarket.Infrastructure.ConfigurationServices.Cookie;
 
 public static class CookieOptionConfig
 {

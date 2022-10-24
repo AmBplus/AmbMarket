@@ -1,4 +1,4 @@
-﻿namespace _02_Framework.Application.DbContext;
+﻿namespace _02_Framework.Application.Interfaces.DatabaseContext;
 
 public interface IBaseDbContext
 {

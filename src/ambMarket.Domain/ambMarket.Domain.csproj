@@ -10,4 +10,8 @@
     <ProjectReference Include="..\01_Framework.Domain\01_Framework.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Visitors\" />
+  </ItemGroup>
+
 </Project>

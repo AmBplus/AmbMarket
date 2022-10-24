@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace ambMarket.Infrastructure.IdentityConfig
+namespace ambMarket.Infrastructure.ConfigurationServices.Identity
 {
     public class CustomIdentityError:IdentityErrorDescriber
     {

@@ -1,4 +1,4 @@
-﻿using ambMarket.Application.Interfaces;
+﻿using ambMarket.Application.Interfaces.Databases;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 
