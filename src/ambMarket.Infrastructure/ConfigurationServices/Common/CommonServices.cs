@@ -14,5 +14,6 @@ public static class CommonServices
         var mapperConfig = new AutoMapper.MapperConfiguration(
             cfg => cfg.AddProfile(new AutoMapperConfig()));
         services.AddSingleton(mapperConfig.CreateMapper());
+        services.AddSignalR();
     }
 }

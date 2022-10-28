@@ -19,6 +19,7 @@ public static class DatabaseConfig
        // Add MongoDb ConnectionString
        services.AddSingleton(new MongoConnectionSettings(configuration.GetConnectionString("MongoDbConnectionName")));
        BsonSerializer.RegisterSerializer(new GuidSerializer(GuidRepresentation.Standard));
+       BsonSerializer.RegisterSerializer(DateTimeSerializer.LocalInstance);
        services.AddTransient(typeof(IMongoDbContext<>), typeof(MongoDbContext<>));
     }
 }

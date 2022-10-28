@@ -1,0 +1,297 @@
+﻿@page
+@model Admin.Endpoint.Pages.Visitors.IndexModel
+@{
+}
+@section CustomCss
+    {
+    <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM STYLES -->
+    <link href="~/Theme/plugins/apex/apexcharts.css" rel="stylesheet" type="text/css">
+    <link href="~/Theme/assets/css/dashboard/dash_1.css" rel="stylesheet" type="text/css" />
+    <link href="~/Theme/assets/css/scrollspyNav.css" rel="stylesheet" type="text/css" />
+    <!-- END PAGE LEVEL PLUGINS/CUSTOM STYLES -->
+}
+    <div class="row layout-top-spacing">
+        <!-- BEGIN ChartLine -->
+    <div id="TodayLine" class="col-xl-12 layout-top-spacing layout-spacing">
+        <div class="statbox widget box box-shadow">
+            <div class="widget-header">
+                <div class="row">
+                    <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                        <h4>ساده</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="widget-content widget-content-area">
+                <div id="todayReportChart" class=""></div>
+            </div>
+        </div>
+    </div>
+    <div id="MonthLines" class="col-xl-12 layout-top-spacing layout-spacing">
+        <div class="statbox widget box box-shadow">
+            <div class="widget-header">
+                <div class="row">
+                    <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                        <h4>ساده</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="widget-content widget-content-area">
+                <div id="MonthReportChart" class=""></div>
+            </div>
+        </div>
+    </div>
+        <!-- END ChartLine-->
+        <div class="col-xl-5 col-lg-12 col-md-6 col-sm-12 col-12 layout-spacing">
+            <div class="widget widget-table-one">
+                <div class="widget-heading">
+                    <h5 class="">آمار امروز</h5>
+                </div>
+
+                <div class="widget-content">
+                    <div class="transactions-list">
+                        <div class="t-item">
+                            <div class="t-company-name">
+                                <div class="t-icon">
+                                    <div class="icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                                    </div>
+                                </div>
+                                <div class="t-name">
+                                    <h4>تعداد بازدید</h4>
+                                    <p class="meta-date">@Model.ResultTodayReport.TodayVisitDto.TotalView</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="transactions-list">
+                        <div class="t-item">
+                            <div class="t-company-name">
+                                <div class="t-icon">
+                                    <div class="icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                                    </div>
+                                </div>
+                                <div class="t-name">
+                                    <h4> تعداد بازدید کننده</h4>
+                                    <p class="meta-date">@Model.ResultTodayReport.TodayVisitDto.VisitorsCount</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="transactions-list">
+                        <div class="t-item">
+                            <div class="t-company-name">
+                                <div class="t-icon">
+                                    <div class="icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                                    </div>
+                                </div>
+                                <div class="t-name">
+                                    <h4>تعداد بازدید در هر صفحه</h4>
+                                    <p class="meta-date">@Model.ResultTodayReport.TodayVisitDto.TotalViewsPerPage</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-5 col-lg-12 col-md-6 col-sm-12 col-12 layout-spacing">
+            <div class="widget widget-table-one">
+                <div class="widget-heading">
+                    <h5 class="">آمار کل بازدید</h5>
+                </div>
+
+                <div class="widget-content">
+                    <div class="transactions-list">
+                        <div class="t-item">
+                            <div class="t-company-name">
+                                <div class="t-icon">
+                                    <div class="icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                                    </div>
+                                </div>
+                                <div class="t-name">
+                                    <h4>تعداد بازدید</h4>
+                                    <p class="meta-date">@Model.ResultTodayReport.GeneralVisitStateDto.TotalView</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="transactions-list">
+                        <div class="t-item">
+                            <div class="t-company-name">
+                                <div class="t-icon">
+                                    <div class="icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                                    </div>
+                                </div>
+                                <div class="t-name">
+                                    <h4>تعداد بازدید کننده</h4>
+                                    <p class="meta-date">@Model.ResultTodayReport.GeneralVisitStateDto.TotalVisitorsCount</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="transactions-list">
+                        <div class="t-item">
+                            <div class="t-company-name">
+                                <div class="t-icon">
+                                    <div class="icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                                    </div>
+                                </div>
+                                <div class="t-name">
+                                    <h4>تعداد بازدید به نسبت بازدید کننده ها </h4>
+                                    <p class="meta-date">@Model.ResultTodayReport.GeneralVisitStateDto.PageViewsPerVisitor</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-12 layout-spacing">
+            <div class="widget widget-table-two">
+
+                <div class="widget-heading">
+                    <h5 class=""> آخرین بازدید ها</h5>
+                </div>
+
+                <div class="widget-content">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th><div class="th-content">Ip</div></th>
+                                    <th><div class="th-content">لینک</div></th>
+                                    <th><div class="th-content">لینک ارجاع</div></th>
+                                    <th><div class="th-content th-heading">مرورگر</div></th>
+                                    <th><div class="th-content"> سیستم عامل </div></th>
+                                    <th><div class="th-content"> خزنده؟ </div></th>
+                                    <th><div class="th-content"> زمان </div></th>
+                                    <th><div class="th-content"> شناسه کاربر </div></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            @foreach (var item in Model.GetLatestVisitorsWebsite.GetLatestVisitors)
+                            {
+                                <tr>
+                                    <td><div class="td-content product-brand">@item.Ip</div></td>
+                                    <td><div class="td-content product-brand">@item.CurrentLink</div></td>
+                                    <td><div class="td-content product-brand">@item.RefererLink</div></td>
+                                    <td>
+                                        <div class="td-content customer-name">
+                                            @if (item.Browser.Contains("Chrome"))
+                                            {
+                                                <img height="30" width="30" src="~/Icon/chrome.png" />
+                                            }
+                                            else if (item.Browser.Contains("Firefox"))
+                                            {
+                                                <img height="30" width="30" src="~/Icon/firefox.png" />
+                                            }
+                                            else
+                                            {
+                                                <img height="30" width="30" src="~/Icon/browser.png" />
+                                            }
+                                        </div>
+                                    </td>
+                                    <td><div class="td-content">@item.OperationSystem</div></td>
+                                    <td><div class="td-content">@item.</div></td>
+                                    <td><div class="td-content pricing"><span class="">@item.CreateDateTime</span></div></td>
+                                    <td><div class="td-content"><span class="badge outline-badge-primary">@item.VisitorId</span></div></td>
+
+                                </tr>
+                            }
+
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </div>
+    @section Scripts
+    {
+    <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+    <script src="~/Theme/plugins/apex/apexcharts.min.js"></script>
+    <script src="~/Theme/assets/js/dashboard/dash_1.js"></script>
+    <script src="~/Theme/assets/js/scrollspyNav.js"></script>
+    <!-- END PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+    <script>
+        // Simple Line
+        var TodayDisplayHour = @Html.Raw(Json.Serialize(Model.ResultTodayReport.TodayVisitDto.VisitPerHour.Display));
+        var TodayDisplayValue = @Html.Raw(Json.Serialize(Model.ResultTodayReport.TodayVisitDto.VisitPerHour.Values));
+        var TodayChart = "todayReportChart";
+        SimpleChartLine(TodayDisplayHour, TodayDisplayValue, TodayChart);
+        var monthDisplayDay = @Html.Raw(Json.Serialize(Model.ResultTodayReport.GeneralVisitStateDto.VisitPerMonth.Display));
+        var monthDisplayValue= @Html.Raw(Json.Serialize(Model.ResultTodayReport.GeneralVisitStateDto.VisitPerMonth.Values));
+        var monthChart = "MonthReportChart";
+        SimpleChartLine(monthDisplayDay, monthDisplayValue, monthChart);
+        function SimpleChartLine(displayHour, displayValue, chartName) {
+            var sline = {
+                chart: {
+                    height: 350,
+                    type: 'line',
+                    zoom: {
+                        enabled: false
+                    },
+                    toolbar: {
+                        show: false,
+                    }
+                },
+                dataLabels: {
+                    enabled: false
+                },
+                stroke: {
+                    curve: 'straight'
+                },
+                series: [
+                    {
+                        name: "Desktops",
+                        data: // [100, 0, 0, 0, 49, 62, 69, 91, 148]
+                            displayValue
+                    }
+                ],
+                title: {
+                    text: 'محصولات در ماه',
+                    align: 'right',
+                    offsetX: -95,
+                },
+                grid: {
+                    row: {
+                        colors: ['#f1f2f3', 'transparent'], // takes an array which will be repeated on columns
+                        opacity: 0.5
+                    },
+                },
+                xaxis: {
+                    categories: // ['فروردین', 'اردیبهشت', 'خرداد', 'تیر', 'مرداد', 'شهریور', 'مهر', 'آبان', 'آذر']
+                        displayHour
+                },
+                yaxis: {
+                    labels: {
+                        offsetX: -20,
+                    }
+                }
+            }
+
+            var chart = new ApexCharts(
+                document.querySelector(`#${chartName}`),
+                sline
+            );
+            chart.render();
+        }
+
+
+    </script>
+    }

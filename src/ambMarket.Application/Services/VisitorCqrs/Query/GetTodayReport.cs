@@ -3,7 +3,6 @@ using ambMarket.Domain.Visitors;
 using MediatR;
 using MongoDB.Driver;
 using Shared;
-using System.Linq;
 
 namespace ambMarket.Application.Services.VisitorCqrs.Query;
 
@@ -21,48 +20,111 @@ public class ResponseGetVisitorTodayReport
 public class GetVisitorTodayReportHandler : IRequestHandler<RequestGetVisitorTodayReport, ResponseGetVisitorTodayReport>
 {
     private IMongoCollection<Visitor> VisitorCollection { get; }
+    private DateTime StartDay { get;  }
+    private DateTime EndDay { get; }
+    private DateTime StartMonth { get; }
+    private DateTime EndMonth { get; }
     public GetVisitorTodayReportHandler(IMongoDbContext<Visitor> mongoDbContext)
     {
         VisitorCollection = mongoDbContext.GetCollection();
+        StartDay = Utility.Now.Date; 
+        EndDay = Utility.Now.Date.AddDays(1);
+        StartMonth = Utility.Now.Date.Date.AddDays(-29);
+        EndMonth = Utility.Now.Date.AddDays(1);
     }
     public async Task<ResponseGetVisitorTodayReport> Handle(RequestGetVisitorTodayReport request, CancellationToken cancellationToken)
     {
-        var start = Utility.Now.Date;
-        var end = Utility.Now.AddDays(1);
-        var pageViewCountQuery = VisitorCollection.AsQueryable()
-            .Where(x => x.CreateDateTime >= start && x.CreateDateTime <= end);
-        var todayPageViewCount =pageViewCountQuery.LongCount();
-        var todayVisitorCount = pageViewCountQuery.GroupBy(x => x.VisitorId).LongCount();
-        var totalPageViews = VisitorCollection.AsQueryable().LongCount();
-        var totalVisitorCount = VisitorCollection.AsQueryable().LongCount();
         return new ResponseGetVisitorTodayReport()
         {
-            GeneralVisitStateDto = new GeneralVisitStateDto()
-            {
-                TotalVisitors = totalVisitorCount,
-                TotalPageViews = totalPageViews,
-                TotalVisitorCount = totalVisitorCount,
-                PageViewsPerVisit = totalPageViews/totalVisitorCount,
-            },
-            TodayVisitDto = new TodayVisitDto()
-            {
-                PageViews = todayPageViewCount,
-                Visitors = todayVisitorCount,
-            }
+            GeneralVisitStateDto = GeneralVisitStateDto(),
+            TodayVisitDto = GetTodayVisitDto()
         };
+    }
+
+    private GeneralVisitStateDto GeneralVisitStateDto()
+    {
+        var totalVisitorCount = VisitorCollection.AsQueryable().GroupBy(x => x.VisitorId).LongCount();
+        var totalVisit = VisitorCollection.AsQueryable().LongCount();
+        return new GeneralVisitStateDto()
+        {
+            TotalVisitorsCount = totalVisitorCount,
+            TotalView = totalVisit,
+            PageViewsPerVisitor = (totalVisitorCount == 0) ? 0 : totalVisit / totalVisitorCount,
+            TotalViewsPerPage = VisitorCollection.AsQueryable().GroupBy(x => x.PhysicalPath).LongCount(),
+            VisitPerMonth = GetVisitPerMonth(),
+        };
+    }
+    private TodayVisitDto GetTodayVisitDto()
+    {
+        var pageViewCountQuery = VisitorCollection.AsQueryable()
+            .Where(x => x.CreateDateTime >= StartDay  && x.CreateDateTime <= EndDay);
+        var todayPageViewCount = pageViewCountQuery.GroupBy(x => x.PhysicalPath).LongCount();
+        var todayVisitorCount = pageViewCountQuery.GroupBy(x => x.VisitorId).LongCount();
+        return new TodayVisitDto()
+        {
+            TotalViewsPerPage = todayPageViewCount,
+            VisitorsCount = todayVisitorCount,
+            TotalView = pageViewCountQuery.LongCount(),
+            VisitPerHour = GetVisitPerHour(),
+        };
+    }
+    private VisitCountDto GetVisitPerHour()
+    {
+        var TodayPageViewList = VisitorCollection.AsQueryable()
+            .Where(x => x.CreateDateTime > StartDay && x.CreateDateTime < EndDay)
+            .Select(x => new { x.CreateDateTime }).ToList();
+        VisitCountDto visitPerHour = new VisitCountDto()
+        {
+            Display = new string[24],
+            Values = new int[24]
+        };
+        for (int i = 0; i <= 23; i++)
+        {
+            visitPerHour.Display[i] =  $"{i}";
+            visitPerHour.Values[i] = TodayPageViewList.Where(x=>x.CreateDateTime.Hour == i).Count();
+        }
+        return visitPerHour;
+    }
+
+    private VisitCountDto GetVisitPerMonth()
+    {
+        var monthViewList = VisitorCollection.AsQueryable()
+            .Where(x => x.CreateDateTime > StartMonth && x.CreateDateTime < EndMonth)
+            .Select(x => new { x.CreateDateTime }).ToList();
+        VisitCountDto perMonth = new VisitCountDto()
+        {
+            Display = new string[30],
+            Values = new int[30]
+        };
+        for (int i = 0; i < 30; i++)
+        {
+            var currentDate = Utility.Now.AddDays(i * (-1)); 
+            perMonth.Display[i] = $"{i}";
+            perMonth.Values[i] = monthViewList.Where(x => x.CreateDateTime.Hour == i).Count();
+        }
+        return perMonth;
     }
 }
 
 public class GeneralVisitStateDto
 {
-    public long TotalPageViews { get; set; }
-    public long TotalVisitors { get; set; }
-    public long PageViewsPerVisit { get; set; }
-    public long TotalVisitorCount { get; set; }
+    public long TotalVisitorsCount { get; set; }
+    public long PageViewsPerVisitor { get; set; }
+    public long TotalView { get; set; }
+    public long TotalViewsPerPage { get; set; }
+    public VisitCountDto VisitPerMonth { get; set; }
 }
 
 public class TodayVisitDto
 {
-    public long PageViews { get; set; }
-    public long Visitors { get; set; }
+    public long TotalViewsPerPage { get; set; }
+    public long VisitorsCount { get; set; }
+    public long TotalView { get; set; }
+    public VisitCountDto VisitPerHour { get; set; }
+}
+
+public class VisitCountDto
+{
+    public string[] Display { get; set; }
+    public int[] Values { get; set; }
 }

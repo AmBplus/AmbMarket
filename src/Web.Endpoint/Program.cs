@@ -1,3 +1,4 @@
+using ambMarket.Infrastructure.Hubs;
 using ambMarket.Infrastructure.Utilities;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -24,5 +25,5 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapRazorPages();
-
+app.MapHub<OnlineVisitor>("/OnlineVisitor");
 app.Run();
