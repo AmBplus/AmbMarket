@@ -8,6 +8,7 @@ public class CatalogTypesConfiguration : IEntityTypeConfiguration<CatalogType>
 {
     public void Configure(EntityTypeBuilder<CatalogType> builder)
     {
-       // throw new NotImplementedException();
+        builder.HasQueryFilter(x => !x.Removed);
+        // throw new NotImplementedException();
     }
 }

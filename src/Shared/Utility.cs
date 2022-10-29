@@ -1,4 +1,6 @@
-﻿namespace Shared
+﻿using Shared.Dto;
+
+namespace Shared
 {
     public static class Utility
     {
@@ -82,6 +84,14 @@
             text = text.ToLower();
 
             return text;
+        }
+        public static ResultDto<T> GenerateResultDto<T>(T entity)
+        {
+            if (entity == null)
+            {
+                return ResultDto<T>.BuildFailedResult("انتیتی نال است");
+            }
+            return ResultDto<T>.BuildSuccessResult(entity);
         }
     }
 }

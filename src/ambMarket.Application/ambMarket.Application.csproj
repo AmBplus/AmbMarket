@@ -17,6 +17,7 @@
   <ItemGroup>
     <ProjectReference Include="..\02_Framework.Application\02_Framework.Application.csproj" />
     <ProjectReference Include="..\ambMarket.Domain\ambMarket.Domain.csproj" />
+    <ProjectReference Include="..\Shared.Resources\Shared.Resources.csproj" />
   </ItemGroup>
 
   <ItemGroup>

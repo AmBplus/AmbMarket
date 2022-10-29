@@ -1,4 +1,5 @@
 ﻿using _02_Framework.Application.Interfaces.DatabaseContext;
+using ambMarket.Application.Interfaces.Databases;
 using ambMarket.Domain.Visitors;
 using ambMarket.Persistence.Contexts;
 using ambMarket.Persistence.Contexts.MongoDb;
@@ -15,7 +16,7 @@ public static class DatabaseConfig
 {
     public static void DbServices(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddDbContext<MarketDbContext>(op => op.UseSqlServer(configuration.GetConnectionString("SqlServerDb")));
+        services.AddDbContext<IMarketDbContext,MarketDbContext>(op => op.UseSqlServer(configuration.GetConnectionString("SqlServerDb")));
        // Add MongoDb ConnectionString
        services.AddSingleton(new MongoConnectionSettings(configuration.GetConnectionString("MongoDbConnectionName")));
        BsonSerializer.RegisterSerializer(new GuidSerializer(GuidRepresentation.Standard));

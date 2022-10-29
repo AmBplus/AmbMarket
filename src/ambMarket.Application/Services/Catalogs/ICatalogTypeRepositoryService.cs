@@ -4,12 +4,12 @@ namespace ambMarket.Application.Services.Catalogs;
 
 public interface ICatalogTypeRepositoryService
 {
-    ResultDto<CatalogTypeDto> Get();
-}
-
-public class CatalogTypeDto
-{
-    public int Id { get; set; }
-    public string Type { get; set; }
-    public int?ParentCatalogTypeId { get; set; }
+    Task<ResultDto<List<CatalogTypeListDto>>> GetAsync();
+    Task<ResultDto<CatalogTypeDto>> GetAsync(int id);
+    Task<ResultDto<List<CatalogTypeListDto>>> GetAsync(int? parentId, int page = 1, int pageSize = Shared.Constants.Page.PageSize);
+    Task<ResultDto<int>> Save(CatalogTypeDto catalogTypeDto);
+    Task<ResultDto> Remove(int id);
+    Task<ResultDto> Update(CatalogTypeDto catalogTypeDto);
+    public void SaveChanges();
+    public Task SaveChangesAsync(CancellationToken cancellationToken);
 }

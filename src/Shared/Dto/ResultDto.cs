@@ -5,14 +5,14 @@ namespace Shared.Dto;
 public class ResultDto
 {
     public bool IsSuccess { get; private set; }
-    public string Message { get; private set; }
+    public List<string> Message { get; private set; }
 
     public static ResultDto BuildSuccessResult(string message)
     {
         return new ResultDto()
         {
             IsSuccess = true,
-            Message = message,
+            Message = new List<string>(){message},
         };
     }
     public static ResultDto BuildSuccessResult()
@@ -20,9 +20,18 @@ public class ResultDto
         return new ResultDto()
         {
             IsSuccess = true,
+            Message = new List<string>()
         };
     }
     public static ResultDto BuildFailedResult(string message)
+    {
+        return new ResultDto()
+        {
+            IsSuccess = false,
+            Message = new List<string>() { message },
+        };
+    }
+    public static ResultDto BuildFailedResult(List<string> message)
     {
         return new ResultDto()
         {
@@ -34,30 +43,31 @@ public class ResultDto
 public class ResultDto<T>
 {
     public bool IsSuccess { get; private set; }
-    public string[] Message { get; private set; }
-    public ResultDto()
+    public List<string> Message { get; private set; }
+    private ResultDto()
     {
 
     }
     public T Data { get; private set; }
-    ResultDto<T> BuildSuccessResult<T>(T data)
+    public static ResultDto<T> BuildSuccessResult<T>(T data)
     {
         return new ResultDto<T>()
         {
             Data = data,
             IsSuccess = true,
+            Message = new List<string>()
         };
     }
-    ResultDto<T> BuildSuccessResult(string message, T data)
+    public static ResultDto<T> BuildSuccessResult(string message, T data)
     {
         return new ResultDto<T>()
         {
             Data = data,
             IsSuccess = true,
-            Message = new[] { message }
+            Message = new List<string>() { message },
         };
     }
-    ResultDto<T> BuildSuccessResult(string[] message, T data)
+    public static ResultDto<T> BuildSuccessResult(List<string> message, T data)
     {
         return new ResultDto<T>()
         {
@@ -66,24 +76,32 @@ public class ResultDto<T>
             Message = message,
         };
     }
-    ResultDto<T> BuildFailedResult(T data)
+    public static ResultDto<T> BuildFailedResult(string message)
+    {
+        return new ResultDto<T>()
+        {
+            Message = new List<string>() { message },
+            IsSuccess = false,
+        };
+    }
+    public static ResultDto<T> BuildFailedResult(List<string> message)
+    {
+        return new ResultDto<T>()
+        {
+            Message = message,
+            IsSuccess = false,
+        };
+    }
+    public static ResultDto<T> BuildFailedResult(string message, T data)
     {
         return new ResultDto<T>()
         {
             Data = data,
             IsSuccess = false,
+            Message = new List<string>() { message }
         };
     }
-    ResultDto<T> BuildFailedResult(string message, T data)
-    {
-        return new ResultDto<T>()
-        {
-            Data = data,
-            IsSuccess = false,
-            Message = new[] { message }
-        };
-    }
-    ResultDto<T> BuildFailedResult(string[] message, T data)
+    public static ResultDto<T> BuildFailedResult(List<string> message, T data)
     {
         return new ResultDto<T>()
         {
