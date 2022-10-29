@@ -27,7 +27,7 @@ public class GetLatestVisitorWebsiteInfoDto
     public string Ip { get; set; }
     public bool IsSpider { get; set; }
     public DateTime CreateDateTime { get; set; }
-    public Guid VisitorId { get; set; }
+    public string VisitorId { get; set; }
 }
 public class GetLatestVisitorWebsiteInfoHandler : IRequestHandler<RequestGetLatestVisitorWebsiteInfo,ResponseGetLatestVisitorWebsiteInfo>
 {

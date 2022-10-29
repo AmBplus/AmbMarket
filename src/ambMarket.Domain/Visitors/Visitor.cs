@@ -15,5 +15,5 @@ public class Visitor
     public VisitorVersion Browser { get; set; }
     public Device Device { get; set; }
     public DateTime CreateDateTime { get; set; }
-    public Guid VisitorId { get; set; }
+    public string VisitorId { get; set; }
 }

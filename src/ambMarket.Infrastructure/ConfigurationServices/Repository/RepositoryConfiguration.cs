@@ -1,4 +1,5 @@
 ﻿using _02_Framework.Application.Interfaces.Repositories;
+using ambMarket.Application.Services.VisitorOnlineRepository;
 using ambMarket.Persistence.Repositories.GenericRepository;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,5 +12,6 @@ public static class RepositoryConfiguration
     {
         // Generic MongoDb Repository
         services.AddTransient(typeof(IMongoDbRepository<>), typeof(MongoDbRepository<>));
+        services.AddScoped<IVisitorOnlineRepositoryService, VisitorOnlineRepositoryService>();
     }
 }

@@ -3,25 +3,18 @@ using Shared.Dto;
 
 namespace _01_Framework.Domain.BaseEntities;
 
-public abstract class BaseEntity
+public class BaseEntityWithId<T>
 {
+    public T Id { get; set; }
+    public DateTime CreateDate { get;}
+    public DateTime UpdateDate { get;private set; }
+    public bool Removed { get;private set;  }
+    public DateTime? RemovedTime { get; private set;  }
 
-    #region Constructors
- 
-    public BaseEntity()
+    public BaseEntityWithId()
     {
-        UpdateDate = CreateDate = Shared.Utility.Now;
+        UpdateDate = CreateDate = Utility.Now;
     }
-
-    #endregion /Constructors
-
-    #region Properties
-    public DateTime CreateDate { get; }
-    public DateTime UpdateDate { get; private set; }
-    public bool Removed { get; private set; }
-    public DateTime? RemovedTime { get; private set; }
-    #endregion
-
     #region /Methods
     public ResultDto SetUpdateDate()
     {
@@ -44,4 +37,3 @@ public abstract class BaseEntity
     }
     #endregion /Methods
 }
- 

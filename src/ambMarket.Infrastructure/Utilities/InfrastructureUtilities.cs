@@ -12,6 +12,10 @@ namespace ambMarket.Infrastructure.Utilities;
 
 public static class InfrastructureUtilities
 {
+    public static string VisitorNameCookie
+    {
+        get => "AmbMartket-VisitorId";
+    }
     /// <summary>
     /// Get Sql Connection String
     /// </summary>
@@ -45,23 +49,30 @@ public static class InfrastructureUtilities
         services.BootstrapRepositories(configuration);
         services.BootstrapFilterServices(configuration);
     }
-
-    public static Guid GetVisitorId(this HttpContext context)
+    /// <summary>
+    /// Get VisitorIdCookie , If Not Exists , Create then Return 
+    /// </summary>
+    /// <param name="context"></param>
+    /// <returns></returns>
+    public static string GetVisitorId(this HttpContext context)
     {
-        string visitorNameCookie = "amb-VisitorId";
-        var visitorIdAsString = context.Request.Cookies[visitorNameCookie];
-        Guid visitorIdAsGuid;
-        if (visitorIdAsString != null && Guid.TryParse(visitorIdAsString, out visitorIdAsGuid))
+        var visitorIdAsString = context.Request.Cookies[VisitorNameCookie];
+        if (!string.IsNullOrWhiteSpace(visitorIdAsString))
         {
-            return visitorIdAsGuid;
+            return visitorIdAsString;
         }
-        visitorIdAsGuid = Guid.NewGuid();
-        context.Response.Cookies.Append(visitorNameCookie, visitorIdAsGuid.ToString(), new CookieOptions()
+        return SetVisitorIdCookie(context);
+    }
+
+    private static string SetVisitorIdCookie(HttpContext context )
+    {
+        var newVisitorId = Guid.NewGuid().ToString();
+        context.Response.Cookies.Append(VisitorNameCookie, newVisitorId, new CookieOptions()
         {
             Path = "/",
             Expires = Shared.Utility.Now.AddDays(1),
             IsEssential = true,
         });
-        return visitorIdAsGuid;
+        return newVisitorId;
     }
 }

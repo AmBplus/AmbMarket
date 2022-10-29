@@ -17,7 +17,7 @@ public class RequestSaveVisitorCommand : IRequest<bool>
     public VisitorVersionDto Browser { get; set; }
     public DeviceDto Device { get; set; }
     public DateTime CreateDateTime { get; set; }
-    public Guid VisitorId { get; set; }
+    public string VisitorId { get; set; }
 }
 
 public class AddVisitorCommandHandler : IRequestHandler<RequestSaveVisitorCommand, bool>

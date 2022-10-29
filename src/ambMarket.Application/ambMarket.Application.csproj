@@ -21,6 +21,8 @@
 
   <ItemGroup>
     <Folder Include="Mapper\" />
+    <Folder Include="Services\Catalogs\" />
+    <Folder Include="Services\VisitorOnlineRepository\" />
     <Folder Include="Services\VisitorCqrs\Query\" />
   </ItemGroup>
 
