@@ -8,4 +8,5 @@ public interface IMarketDbContext : IBaseDbContext
 {
     public DbSet<CatalogType> CatalogTypes { get; set; }
     public DbSet<CatalogBrand> CatalogBrands { get; set; }
+    public DbSet<CatalogItem> CatalogItems { get; set; }
 }

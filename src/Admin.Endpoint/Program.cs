@@ -1,3 +1,4 @@
+using ambMarket.Infrastructure.ConfigurationServices.AdminService;
 using ambMarket.Infrastructure.Hubs;
 using ambMarket.Infrastructure.Utilities;
 
@@ -5,6 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.WireUpInfrastructureServices(builder.Configuration);
+builder.Services.BootstrapCustomAdminServices();
 builder.Services.AddRazorPages();
 //mapper
 var app = builder.Build();

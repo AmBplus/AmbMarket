@@ -1,6 +1,6 @@
 using Admin.Endpoint.Models.ViewModels.Catalogs;
-using ambMarket.Application.Services.Catalogs;
-
+using ambMarket.Application.Services.Catalogs.CatalogTypeService;
+using ambMarket.Application.Services.Catalogs.CatalogTypeService;
 using Mapster;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;

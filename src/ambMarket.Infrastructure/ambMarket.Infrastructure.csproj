@@ -11,6 +11,7 @@
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="12.0.0" />
     <PackageReference Include="AutoMapper.Collection" Version="9.0.0" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.10" />
@@ -24,6 +25,8 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="RestSharp" Version="108.0.2" />
     <PackageReference Include="UAParser" Version="3.1.47" />
   </ItemGroup>
 
@@ -35,6 +38,8 @@
     <Folder Include="ConfigurationServices\Cookie\" />
     <Folder Include="ConfigurationServices\DbConfig\" />
     <Folder Include="ConfigurationServices\Filter\" />
+    <Folder Include="ConfigurationServices\AdminService\" />
+    <Folder Include="ConfigurationServices\WebService\" />
     <Folder Include="ConfigurationServices\Repository\" />
   </ItemGroup>
 

@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="12.0.0" />
+    <PackageReference Include="FluentValidation" Version="11.2.2" />
     <PackageReference Include="Mapster" Version="7.3.0" />
     <PackageReference Include="MediatR" Version="11.0.0" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
@@ -21,8 +22,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Mapper\" />
-    <Folder Include="Services\Catalogs\" />
+    <Folder Include="Interfaces\UriComposer\" />
+    <Folder Include="Services\Common\Cmd\" />
+    <Folder Include="Services\Common\Query\" />
     <Folder Include="Services\VisitorOnlineRepository\" />
     <Folder Include="Services\VisitorCqrs\Query\" />
   </ItemGroup>

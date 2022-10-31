@@ -1,5 +1,7 @@
 ﻿using _02_Framework.Application.Interfaces.Repositories;
-using ambMarket.Application.Services.Catalogs;
+using ambMarket.Application.Services.Catalogs.CatalogBrandService;
+using ambMarket.Application.Services.Catalogs.CatalogItems.CatalogItemServices;
+using ambMarket.Application.Services.Catalogs.CatalogTypeService;
 using ambMarket.Application.Services.VisitorOnlineRepository;
 using ambMarket.Persistence.Repositories.GenericRepository;
 using Microsoft.Extensions.Configuration;
@@ -15,5 +17,7 @@ public static class RepositoryConfiguration
         services.AddTransient(typeof(IMongoDbRepository<>), typeof(MongoDbRepository<>));
         services.AddScoped<IVisitorOnlineRepositoryService, VisitorOnlineRepositoryService>();
         services.AddScoped<ICatalogTypeRepositoryService, CatalogTypeRepositoryService>();
+        services.AddScoped<ICatalogBrandRepositoryService, CatalogBrandRepositoryService>();
+        services.AddScoped<ISaveNewCatalogItemQueryService, SaveNewCatalogItemQueryService>();
     }
 }

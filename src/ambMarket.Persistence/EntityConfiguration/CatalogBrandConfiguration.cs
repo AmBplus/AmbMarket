@@ -8,7 +8,6 @@ public class CatalogBrandConfiguration : IEntityTypeConfiguration<CatalogBrand>
 {
     public void Configure(EntityTypeBuilder<CatalogBrand> builder)
     {
-        
-        //throw new NotImplementedException();
+        builder.HasQueryFilter(x => !x.Removed);
     }
 }
