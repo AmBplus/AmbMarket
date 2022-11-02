@@ -1,4 +1,4 @@
-using ambMarket.Application.Services.Catalogs.CatalogBrandService;
+using ambMarket.Application.Services.Catalogs.CatalogBrandCrudService;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Admin.Endpoint.Pages.CatalogBrand

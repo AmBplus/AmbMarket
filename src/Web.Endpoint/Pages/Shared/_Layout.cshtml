@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="~/assets/css/theme.css">
     <!-- Here goes your custom.css -->
     <link rel="stylesheet" href="~/assets/css/custom.css">
+    @await RenderSectionAsync("CustomCss",false)
     <!-- colors: amber,blue,brown,cyan,default,green,indigo,orange,pink,purple,red,teal,yellow -->
     <link rel="stylesheet" href="~/assets/css/colors/default.css" id="colorswitch">
 </head>

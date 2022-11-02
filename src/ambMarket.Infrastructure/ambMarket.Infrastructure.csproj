@@ -41,6 +41,7 @@
     <Folder Include="ConfigurationServices\AdminService\" />
     <Folder Include="ConfigurationServices\WebService\" />
     <Folder Include="ConfigurationServices\Repository\" />
+    <Folder Include="Utilities\UriCompose\" />
   </ItemGroup>
 
 </Project>

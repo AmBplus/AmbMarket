@@ -1,4 +1,4 @@
-﻿using ambMarket.Domain.Catalog;
+﻿using ambMarket.Domain.CatalogAggregate;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

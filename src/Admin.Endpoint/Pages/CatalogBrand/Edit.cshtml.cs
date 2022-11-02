@@ -1,5 +1,5 @@
 using Admin.Endpoint.Models.ViewModels.Catalogs;
-using ambMarket.Application.Services.Catalogs.CatalogBrandService;
+using ambMarket.Application.Services.Catalogs.CatalogBrandCrudService;
 using Mapster;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;

@@ -1,23 +1,18 @@
-﻿using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
+﻿using ambMarket.Application.Interfaces.UriComposer;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace StaticFile.EndPoint.Controllers
+namespace StaticFile.Endpoint.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class ImagesController : ControllerBase
     {
         private readonly IWebHostEnvironment _environment;
-
-        public ImagesController(IWebHostEnvironment hostingEnvironment)
+        private readonly IUriImageComposer UriImageComposer;
+        public ImagesController(IWebHostEnvironment hostingEnvironment, IUriImageComposer uriImageComposer)
         {
             _environment = hostingEnvironment;
+            UriImageComposer = uriImageComposer;
         }
         [HttpPost]
         public IActionResult Post(string apiKey)
@@ -43,9 +38,7 @@ namespace StaticFile.EndPoint.Controllers
             }
             catch (Exception ex)
             {
-
                 return StatusCode(500, $"Internal server error");
-                throw new Exception("upload image error", ex);
             }
 
 
@@ -73,7 +66,7 @@ namespace StaticFile.EndPoint.Controllers
                     {
                         file.CopyTo(fileStream);
                     }
-                    address.Add(folder + fileName);
+                    address.Add(UriImageComposer.UriComposer(folder + fileName));
                 }
             }
             return new UploadDto()

@@ -11,7 +11,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Catalog\" />
+    <Folder Include="CatalogAggregate\" />
+    <Folder Include="BasketAggregate\" />
   </ItemGroup>
 
 </Project>

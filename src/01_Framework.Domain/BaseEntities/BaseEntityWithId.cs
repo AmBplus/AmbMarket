@@ -5,7 +5,7 @@ namespace _01_Framework.Domain.BaseEntities;
 
 public class BaseEntityWithId<T>
 {
-    public T Id { get; set; }
+    public T Id { get;private set; }
     public DateTime CreateDate { get;}
     public DateTime UpdateDate { get;private set; }
     public bool Removed { get;private set;  }

@@ -1,5 +1,5 @@
 ﻿using _02_Framework.Application.Interfaces.Repositories;
-using ambMarket.Domain.Visitors;
+using ambMarket.Domain.VisitorsAggregate;
 using Mapster;
 using MediatR;
 
@@ -22,10 +22,10 @@ public class RequestSaveVisitorCommand : IRequest<bool>
 
 public class AddVisitorCommandHandler : IRequestHandler<RequestSaveVisitorCommand, bool>
 {
-    private IMongoDbRepository<Domain.Visitors.Visitor> MongoDbRepository { get; }
+    private IMongoDbRepository<Visitor> MongoDbRepository { get; }
 
 
-    public AddVisitorCommandHandler(IMongoDbRepository<Domain.Visitors.Visitor> mongoDbRepository)
+    public AddVisitorCommandHandler(IMongoDbRepository<Visitor> mongoDbRepository)
     {
         MongoDbRepository = mongoDbRepository;
     }

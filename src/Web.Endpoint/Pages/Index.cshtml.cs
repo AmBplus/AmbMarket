@@ -1,5 +1,4 @@
 ﻿using _02_Framework.Application.Interfaces.Repositories;
-using ambMarket.Domain.Visitors;
 using ambMarket.Infrastructure.Filters;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;

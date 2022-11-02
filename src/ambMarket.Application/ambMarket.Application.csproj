@@ -22,7 +22,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Interfaces\UriComposer\" />
+    <Folder Include="Dto\" />
+    <Folder Include="Services\Baskets\Query\" />
+    <Folder Include="Services\Catalogs\CatalogItems\Cmd\UnRemoveCatalogItem\" />
+    <Folder Include="Services\Catalogs\CatalogItems\Cmd\RemoveCatalogItem\" />
+    <Folder Include="Services\Catalogs\CatalogItems\Query\CatalogItemServices\GetListCatalogForAdmin\" />
+    <Folder Include="Services\Catalogs\CatalogItems\Query\GetPdp\" />
     <Folder Include="Services\Common\Cmd\" />
     <Folder Include="Services\Common\Query\" />
     <Folder Include="Services\VisitorOnlineRepository\" />

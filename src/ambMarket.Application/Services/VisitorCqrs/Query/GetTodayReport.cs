@@ -1,5 +1,5 @@
 ﻿using _02_Framework.Application.Interfaces.DatabaseContext;
-using ambMarket.Domain.Visitors;
+using ambMarket.Domain.VisitorsAggregate;
 using MediatR;
 using MongoDB.Driver;
 using Shared;

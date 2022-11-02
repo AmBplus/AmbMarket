@@ -1,23 +1,18 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Admin.Endpoint.Models.ViewModels.Catalogs;
-using ambMarket.Application.Services.Catalogs.CatalogItems.AddNewCatalogItem;
-using ambMarket.Application.Services.Catalogs.CatalogItems.CatalogItemServices;
+using ambMarket.Application.Services.Catalogs.CatalogItems.Cmd.AddNewCatalogItem;
+using ambMarket.Application.Services.Catalogs.CatalogItems.Query.CatalogItemServices.GetSaveNewCatalogItemQuery;
 using ambMarket.Infrastructure.ExternalApi.ImageServer;
 using Mapster;
-//using Application.Catalogs.CatalohItems.AddNewCatalogItem;
 using MediatR;
-//using Application.Dtos;
-//using Infrastructure.ExternalApi.ImageServer;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Shared.Dto;
+//using Application.Catalogs.CatalohItems.AddNewCatalogItem;
+//using Application.Dtos;
+//using Infrastructure.ExternalApi.ImageServer;
 
-namespace Admin.EndPoint.Pages.CatalogItems
+namespace Admin.Endpoint.Pages.CatalogItems
 {
     public class CreateModel : PageModel
     {
@@ -73,7 +68,7 @@ namespace Admin.EndPoint.Pages.CatalogItems
                     images.Add(new AddNewCatalogItemImage_Dto { Src = item });
                 }
             }
-            var requestSaveCatalogItemDto =  Data.Adapt<RequestSaveNewCatalogItemDto>();
+            var requestSaveCatalogItemDto =  Data.Adapt<RequestSaveNewCatalogItemCmd>();
             requestSaveCatalogItemDto.Images = images;
             var resultService = await Mediator.Send(requestSaveCatalogItemDto);
             return new JsonResult(resultService);

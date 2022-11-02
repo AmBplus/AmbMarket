@@ -1,7 +1,7 @@
 ﻿using _02_Framework.Application.Interfaces.Repositories;
-using ambMarket.Application.Services.Catalogs.CatalogBrandService;
-using ambMarket.Application.Services.Catalogs.CatalogItems.CatalogItemServices;
-using ambMarket.Application.Services.Catalogs.CatalogTypeService;
+using ambMarket.Application.Services.Catalogs.CatalogBrandCrudService;
+using ambMarket.Application.Services.Catalogs.CatalogItems.Query.CatalogItemServices.GetSaveNewCatalogItemQuery;
+using ambMarket.Application.Services.Catalogs.CatalogTypeCrudService;
 using ambMarket.Application.Services.VisitorOnlineRepository;
 using ambMarket.Persistence.Repositories.GenericRepository;
 using Microsoft.Extensions.Configuration;

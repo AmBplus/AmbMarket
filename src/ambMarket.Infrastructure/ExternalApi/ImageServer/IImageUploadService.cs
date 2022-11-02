@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using ambMarket.Application.Interfaces.UriComposer;
+using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using RestSharp;
 
@@ -10,9 +11,16 @@ namespace ambMarket.Infrastructure.ExternalApi.ImageServer
     }
     public class ImageUploadService : IImageUploadService
     {
+        private readonly IUriImageComposer uriImageComposer ;
+
+        public ImageUploadService(IUriImageComposer uriImageComposer)
+        {
+            this.uriImageComposer = uriImageComposer;
+        }
+
         public async Task<List<string>> Upload(List<IFormFile> files)
         {
-            var restClientOption = new RestClientOptions("https://localhost:7123/api/Images?apikey=mysecretkey")
+            var restClientOption = new RestClientOptions(uriImageComposer.UriComposer("api/Images?apikey=mysecretkey"))
             {
                 Timeout = -1,
                 ThrowOnDeserializationError = true,

@@ -1,5 +1,5 @@
 ﻿using ambMarket.Application.Interfaces.Databases;
-using ambMarket.Domain.Catalog;
+using ambMarket.Domain.CatalogAggregate;
 using MediatR;
 
 namespace ambMarket.Application.Services.Common.Query;

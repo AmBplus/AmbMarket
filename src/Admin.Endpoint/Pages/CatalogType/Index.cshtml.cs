@@ -1,5 +1,4 @@
-
-using ambMarket.Application.Services.Catalogs.CatalogTypeService;
+using ambMarket.Application.Services.Catalogs.CatalogTypeCrudService;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Admin.Endpoint.Pages.CatalogType

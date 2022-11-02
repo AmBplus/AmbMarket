@@ -1,6 +1,5 @@
 ﻿using _02_Framework.Application.Interfaces.DatabaseContext;
 using ambMarket.Application.Interfaces.Databases;
-using ambMarket.Domain.Visitors;
 using ambMarket.Persistence.Contexts;
 using ambMarket.Persistence.Contexts.MongoDb;
 using Microsoft.EntityFrameworkCore;

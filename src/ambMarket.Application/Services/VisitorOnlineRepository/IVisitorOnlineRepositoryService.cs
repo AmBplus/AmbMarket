@@ -1,5 +1,5 @@
 ﻿using _02_Framework.Application.Interfaces.DatabaseContext;
-using ambMarket.Domain.Visitors;
+using ambMarket.Domain.VisitorsAggregate;
 using MongoDB.Driver;
 using MongoDB.Driver.Linq;
 using Shared;

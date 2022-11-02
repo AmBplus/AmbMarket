@@ -1,5 +1,7 @@
-﻿using ambMarket.Application.Services.VisitorCqrs.Command;
+﻿using ambMarket.Application.Interfaces.UriComposer;
+using ambMarket.Application.Services.VisitorCqrs.Command;
 using ambMarket.Infrastructure.Utilities.Map.AutoMapper;
+using ambMarket.Infrastructure.Utilities.UriCompose;
 using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,7 +13,6 @@ public static class CommonServices
     public static void BootstrapCommonServices(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddMediatR(typeof(RequestSaveVisitorCommand));
-        services.AddAutoMapper(typeof(AutoMapperProfile));
         services.AddSignalR();
         services.Configure<Infrastructure.Settings.ApplicationSettings>
                 (configuration.GetSection(key: nameof(Infrastructure.Settings.ApplicationSettings)))
@@ -27,5 +28,7 @@ public static class CommonServices
 
                 return result;
             });
+        services.AddSingleton<IUriImageComposer, UriImageComposer>();
+        services.AddAutoMapper(typeof(AutoMapperProfile));
     }
 }
