@@ -16,14 +16,14 @@ namespace Web.Endpoint.Pages.Baskets
         }
         private WebEndpointUtility WebEndpointUtility { get;  }
         private IBasketService BasketService { get; }
-        public BasketDto BasketDto { get; set; }
+        public BasketDto? BasketDto { get; set; }
         public async Task OnGet()
         {
             string buyerId = WebEndpointUtility.GetBuyerId(User, HttpContext);
-            var result = await BasketService.GetOrCreateBasketForUser(buyerId);
+            var result = await BasketService.GetBasketForUser(buyerId);
             if (result.IsSuccess)
             {
-                BasketDto = result.Data;
+                BasketDto = result.Data ?? new BasketDto();
                 return;
             }
             BasketDto = new BasketDto();

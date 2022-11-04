@@ -27,6 +27,12 @@ public class BasketsController : ControllerBase
        }
        return BadRequest(new {message= result.Message });
     }
+    [HttpPost]
+    public async Task<IActionResult> RemoveItemFromBasketWithRedirectToPage([FromForm]long itemId)
+    {
+        await RemoveItemFromBasket( itemId);
+        return Redirect("/Baskets");
+    }
     [AllowAnonymous]
     [HttpPost]
     public async Task<IActionResult> SetQuantity( long basketItemId , int quantity)
@@ -45,6 +51,15 @@ public class BasketsController : ControllerBase
         var buyerId = WebEndpointUtility.GetBuyerId(User, HttpContext);
         var basket = await BasketService.GetOrCreateBasketIdForUser(buyerId);
         await BasketService.AddItemToBasket(basket.Data, itemId);
+        return Redirect("/Baskets/Index");
+    }
+    [AllowAnonymous]
+    [HttpPost]
+    public async Task<IActionResult> AddToCart([FromForm]long itemId,[FromForm]int quantity)
+    {
+        var buyerId = WebEndpointUtility.GetBuyerId(User, HttpContext);
+        var basket = await BasketService.GetOrCreateBasketIdForUser(buyerId);
+        await BasketService.AddItemToBasket(basket.Data, itemId ,quantity);
         return Redirect("/Baskets/Index");
     }
 }

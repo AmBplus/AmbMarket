@@ -5,12 +5,15 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 using System.Text.Encodings.Web;
+using ambMarket.Application.Services.Baskets;
 using ambMarket.Domain.userAggregate;
+using ambMarket.Infrastructure.Utilities.Cookie;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
+using Shared.AspCore.Utility;
 
 namespace Web.Endpoint.Areas.Identity.Pages.Account
 {
@@ -22,12 +25,13 @@ namespace Web.Endpoint.Areas.Identity.Pages.Account
         private readonly IUserEmailStore<User> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
         //private readonly IEmailSender _emailSender;
-
+        private IBasketService BasketService { get; }
+        private CookieHelper CookieHelper { get; }
         public RegisterModel(
             UserManager<User> userManager,
             IUserStore<User> userStore,
             SignInManager<User> signInManager,
-            ILogger<RegisterModel> logger//,
+            ILogger<RegisterModel> logger, CookieHelper cookieHelper, IBasketService basketService //,
             //IEmailSender emailSender
             )
         {
@@ -36,6 +40,8 @@ namespace Web.Endpoint.Areas.Identity.Pages.Account
             _emailStore = GetEmailStore();
             _signInManager = signInManager;
             _logger = logger;
+            CookieHelper = cookieHelper;
+            BasketService = basketService;
             //_emailSender = emailSender;
         }
 
@@ -133,6 +139,12 @@ namespace Web.Endpoint.Areas.Identity.Pages.Account
                     }
                     else
                     {
+                        var unknownUserId = CookieHelper.GetBuyerIdFromCookie(HttpContext);
+                        if (!string.IsNullOrWhiteSpace(unknownUserId))
+                        {
+                            BasketService.TransferUnknownUserBasketToUser(unknownUserId, User.GetUserId());
+                            CookieHelper.RemoveBuyerIdCookie(HttpContext);
+                        }
                         await _signInManager.SignInAsync(user, isPersistent: false);
                         return LocalRedirect(returnUrl);
                     }

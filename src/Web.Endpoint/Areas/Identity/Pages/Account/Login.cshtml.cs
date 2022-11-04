@@ -3,11 +3,15 @@
 #nullable disable
 
 using System.ComponentModel.DataAnnotations;
+using ambMarket.Application.Services.Baskets;
 using ambMarket.Domain.userAggregate;
+using ambMarket.Infrastructure.Utilities.Cookie;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Shared.AspCore.Utility;
+using Web.Endpoint.Infrastructure.WebUtility;
 
 namespace Web.Endpoint.Areas.Identity.Pages.Account
 {
@@ -15,11 +19,14 @@ namespace Web.Endpoint.Areas.Identity.Pages.Account
     {
         private readonly SignInManager<User> _signInManager;
         private readonly ILogger<LoginModel> _logger;
-
-        public LoginModel(SignInManager<User> signInManager, ILogger<LoginModel> logger)
+        private IBasketService BasketService { get; }
+        private CookieHelper CookieHelper { get; }
+        public LoginModel(SignInManager<User> signInManager, ILogger<LoginModel> logger, IBasketService basketService, CookieHelper cookieHelper)
         {
             _signInManager = signInManager;
             _logger = logger;
+            BasketService = basketService;
+            CookieHelper = cookieHelper;
         }
 
         /// <summary>
@@ -109,12 +116,19 @@ namespace Web.Endpoint.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
+                    var unknownUserId = CookieHelper.GetBuyerIdFromCookie(HttpContext);
+                    if (!string.IsNullOrWhiteSpace(unknownUserId))
+                    {
+                        BasketService.TransferUnknownUserBasketToUser(unknownUserId, User.GetUserId());
+                        CookieHelper.RemoveBuyerIdCookie(HttpContext);
+                    }
+                    
                     return LocalRedirect(returnUrl);
                 }
                 if (result.RequiresTwoFactor)
                 {
                     return RedirectToPage("./LoginWith2fa", new { ReturnUrl = returnUrl, RememberMe = Input.RememberMe });
-                }
+                } 
                 if (result.IsLockedOut)
                 {
                     _logger.LogWarning("User account locked out.");

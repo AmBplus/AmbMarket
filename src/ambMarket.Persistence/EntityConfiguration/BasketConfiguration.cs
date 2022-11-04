@@ -10,6 +10,6 @@ public class BasketConfiguration : IEntityTypeConfiguration<Basket>
     public void Configure(EntityTypeBuilder<Basket> builder)
     {
         builder.HasQueryFilter(x => !x.Removed);
-        
+        builder.HasIndex(x => x.BuyerId);
     }
 }

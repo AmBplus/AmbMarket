@@ -11,12 +11,14 @@ namespace ambMarket.Application.Services.Baskets;
 
 public interface IBasketService
 {
-    Task<ResultDto<BasketDto>> GetOrCreateBasketForUser(string BuyerId);
-    Task<ResultDto<long>> GetOrCreateBasketIdForUser(string BuyerId);
+    Task<ResultDto<BasketDto>> GetOrCreateBasketForUser(string buyerId);
+    Task<ResultDto<BasketDto?>> GetBasketForUser(string buyerId);
+    Task<ResultDto<long>> GetOrCreateBasketIdForUser(string buyerId);
     Task<ResultDto> AddItemToBasket(long basketId, long catalogItemId, int quantity = 1);
     Task<ResultDto> RemoveItemFromBasket( long ItemId);
     Task<ResultDto> SetQuantities(long itemId, int quantity);
 
+    Task<ResultDto> TransferUnknownUserBasketToUser(string unknownBuyer, string userId);
 
 }
 public class BasketService : IBasketService
@@ -54,6 +56,16 @@ public class BasketService : IBasketService
             
     }
 
+    public async Task<ResultDto<BasketDto?>> GetBasketForUser(string buyerId)
+    {
+        var isExistsBasket = await Context.Baskets.AnyAsync(x => x.BuyerId == buyerId);
+        if (isExistsBasket)
+        {
+            return await GetOrCreateBasketForUser(buyerId);
+        }
+        return ResultDto<BasketDto>.BuildFailedResult();
+    }
+
     private IQueryable<BasketDto> basketQueryMapToBasketDto(IQueryable<Basket> query)
     {
         return query.Select(b => new BasketDto()
@@ -72,6 +84,7 @@ public class BasketService : IBasketService
             }).ToList()
         });
     }
+    
     public async Task<ResultDto<long>> GetOrCreateBasketIdForUser(string buyerId)
     {
         var isBasketExists = await Context.Baskets.AnyAsync(x => x.BuyerId == buyerId);
@@ -144,5 +157,29 @@ public class BasketService : IBasketService
             return ResultDto.BuildFailedResult("مشکلی پیش آمده است");
         }
         return ResultDto.BuildSuccessResult();
+    }
+
+    public async Task<ResultDto> TransferUnknownUserBasketToUser(string unknownBuyer, string userId)
+    {
+        var isExistsAnyBasketForUnknownBuyer = await Context.Baskets.AnyAsync(x => x.BuyerId == unknownBuyer);
+        if(!isExistsAnyBasketForUnknownBuyer) return ResultDto.BuildSuccessResult(); 
+        Basket newBasket = new Basket(userId);
+        Context.Baskets.Add(newBasket);
+        var oldBasket = await Context.Baskets.Include(x=>x.Items).Where(x => x.BuyerId == unknownBuyer).FirstOrDefaultAsync();
+       foreach (var item in oldBasket.Items)
+       {
+           if (Context.Entry(item).State == EntityState.Detached)
+           {
+               Context.BasketItems.Attach(item);
+           }
+           item.ChangeBasketItemId(newBasket.Id);
+           if (Context.Entry(item).State == EntityState.Unchanged)
+           {
+               Context.Entry(item).State = EntityState.Modified;
+           }
+       }
+       oldBasket.SetRemove();
+       await Context.SaveChangesAsync();
+       return ResultDto.BuildSuccessResult();
     }
 }

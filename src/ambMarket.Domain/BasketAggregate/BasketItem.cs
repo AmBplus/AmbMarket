@@ -35,6 +35,10 @@ public class BasketItem : BaseEntityWithId<long>
 
     #region Methods
 
+    public void ChangeBasketItemId(long newId)
+    {
+        BasketId = newId;
+    }
     public bool IncreaseQuantity(int quantity)
     {
         if (quantity > CatalogItem.AvailabeStock)

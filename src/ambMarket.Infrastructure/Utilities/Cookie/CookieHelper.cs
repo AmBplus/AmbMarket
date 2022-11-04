@@ -11,13 +11,13 @@ public class CookieHelper
     {
         this.ApplicationSettings = applicationSettings;
     }
-    public string BuyerIdCookie { get => "amb-BuyerIdCookie"; }
+    public string BuyerIdCookieName { get => "amb-BuyerIdCookie"; }
     public string GetOrSetBuyerIdFromCookie(HttpContext context)
     {
         string buyerId;
-        if (context.Request.Cookies.ContainsKey(BuyerIdCookie))
+        if (context.Request.Cookies.ContainsKey(BuyerIdCookieName))
         {
-            context.Request.Cookies.TryGetValue(BuyerIdCookie, out buyerId);
+            context.Request.Cookies.TryGetValue(BuyerIdCookieName, out buyerId);
             if (!string.IsNullOrWhiteSpace(buyerId))
             {
                 return buyerId;
@@ -31,8 +31,25 @@ public class CookieHelper
             Expires = Utility.Now.AddSeconds(ApplicationSettings.ExpireBuyerIdCookieTimeBySeconds)
         };
         buyerId = Guid.NewGuid().ToString();
-        context.Response.Cookies.Append(BuyerIdCookie,buyerId,cookieOptions);
+        context.Response.Cookies.Append(BuyerIdCookieName,buyerId,cookieOptions);
         return buyerId;
     }
-    
+
+    public string? GetBuyerIdFromCookie(HttpContext context)
+    {
+        string buyerIdFromCookie = string.Empty;
+        if (context.Request.Cookies.ContainsKey(BuyerIdCookieName))
+        {
+            context.Request.Cookies.TryGetValue(BuyerIdCookieName, out buyerIdFromCookie);
+        }
+        return buyerIdFromCookie;
+    }
+
+    public void RemoveBuyerIdCookie(HttpContext context)
+    {
+        if (context.Request.Cookies.ContainsKey(BuyerIdCookieName))
+        {
+            context.Response.Cookies.Delete(BuyerIdCookieName);
+        }
+    }
 }

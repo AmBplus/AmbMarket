@@ -30,9 +30,9 @@
                     <div class="swiper-container gallery-slider swiper-container-initialized swiper-container-horizontal swiper-container-rtl">
                         <div class="swiper-wrapper" style="transform: translate3d(1660px, 0px, 0px); transition-duration: 0ms;">
 
-                          
+
                             @foreach (var item in Model.Pdp.Images)
-                            { 
+                            {
                                 <div class="swiper-slide" data-swiper-slide-index="1" style="width: 415px;">
                                     <img src="@item" data-zoom-image="@item" class="zoom-image" alt="gallery item">
                                 </div>
@@ -44,7 +44,7 @@
                     <div class="swiper-container gallery-slider-thumbs swiper-container-initialized swiper-container-horizontal swiper-container-rtl">
                         <div class="swiper-wrapper" style="transform: translate3d(622.5px, 0px, 0px); transition-duration: 0ms;">
                             @{
-                                int  i = 1;
+                                int i = 1;
                                 string classname = "swiper-slide";
                             }
 
@@ -141,7 +141,7 @@
                 </div>
             </div>
             <div class="col-xl-3 col-lg-4 col-md-6">
-                <div class="box-info-product">
+                <form asp-action="AddToCart" asp-controller="Baskets" method="post" class="box-info-product">
 
                     <div class="d-block mb-3">
                         <span class="d-block">
@@ -150,7 +150,8 @@
                         <div class="num-block">
                             <div class="num-in">
                                 <span class="plus"></span>
-                                <input type="text" class="in-num" value="1" readonly="">
+                                <input type="hidden" value="@Model.Pdp.Id" name="itemId" />
+                                <input type="text" class="in-num" name="quantity" value="1" readonly="">
                                 <span class="minus dis"></span>
                             </div>
                         </div>
@@ -158,12 +159,24 @@
                     <div class="d-flex align-items-center justify-content-end mt-3">
                         <div class="product-price">
                             <div class="product-price-info">
-                                <div class="product-price-off">
-                                    %10 <span>تخفیف</span>
+                   @*             <div class="product-price-off">
+
+                                    @if (Model.PercentDiscount != 0)
+                                    {
+                                        <div>
+                                            %@Model.PercentDiscount
+                                            <span> تخفیف </span>
+                                        </div>
+                                    }
                                 </div>
                                 <div class="product-price-prev">
-                                    3,216,000
-                                </div>
+                                    @if (Model.OldPrice != 0)
+                                    {
+                                        <span>
+                                            @Model.OldPrice.Value.ToString("n0")
+                                        </span>
+                                    }
+                                </div>*@
                             </div>
                             <div class="product-price-real">
                                 <div class="product-price-raw">@Model.Pdp.Price.ToString("n0") </div>
@@ -172,11 +185,11 @@
                         </div>
                     </div>
                     <div class="d-flex align-items-center">
-                        <a asp-controller="Baskets" asp-action="AddToCart" asp-route-itemId="@Model.Pdp.Id" class="add-to-cart">
+                        <button type="submit" class="add-to-cart">
                             افزودن به سبد خرید
-                        </a>
+                        </button>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
         <div class="py-3">
@@ -777,7 +790,7 @@
                                 </div>
                             </div>
                             <div class="product-card-middle">
-                              
+
                                 <h6 class="product-name">
                                     <a href="#">
                                         @item.Name
@@ -809,7 +822,7 @@
 
 
 @section Scripts
-{
+    {
     <link rel="stylesheet" href="~/assets/css/plugins/swiper.min.css">
     <script src="~/assets/js/plugins/swiper.min.js"></script>
 }
