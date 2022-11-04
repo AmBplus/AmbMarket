@@ -2,7 +2,7 @@
 
 namespace ambMarket.Application.Services.Catalogs.CatalogTypeCrudService;
 
-public interface ICatalogTypeRepositoryService
+public interface ICatalogTypeService
 {
     Task<ResultDto<List<CatalogTypeListDto>>> GetAsync();
     Task<ResultDto<CatalogTypeDto>> GetAsync(int id);

@@ -172,7 +172,7 @@
                         </div>
                     </div>
                     <div class="d-flex align-items-center">
-                        <a href="#" class="add-to-cart">
+                        <a asp-controller="Baskets" asp-action="AddToCart" asp-route-itemId="@Model.Pdp.Id" class="add-to-cart">
                             افزودن به سبد خرید
                         </a>
                     </div>
@@ -789,7 +789,7 @@
                                 <div class="product-price">
                                     @item.Price.ToString("n0") تومان
                                 </div>
-                                <a href="#" class="btn-add-to-cart">
+                                <a asp-controller="Baskets" asp-action="AddToCart" asp-route-itemId="@item.Id" class="btn-add-to-cart">
                                     <i class="fad fa-cart-plus"></i>
                                     افزودن به سبد خرید
                                 </a>

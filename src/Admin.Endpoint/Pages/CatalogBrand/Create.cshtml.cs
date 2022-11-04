@@ -8,9 +8,9 @@ namespace Admin.Endpoint.Pages.CatalogBrand
 {
     public class CreateModel : PageModel
     {
-        private readonly ICatalogBrandRepositoryService catalogBrandService;
+        private readonly ICatalogBrandService catalogBrandService;
 
-        public CreateModel(ICatalogBrandRepositoryService catalogBrandService)
+        public CreateModel(ICatalogBrandService catalogBrandService)
         {
             this.catalogBrandService = catalogBrandService;
         }

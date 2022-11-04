@@ -5,9 +5,9 @@ namespace Admin.Endpoint.Pages.CatalogType
 {
     public class IndexModel : PageModel
     {
-        private readonly ICatalogTypeRepositoryService catalogTypeService;
+        private readonly ICatalogTypeService catalogTypeService;
 
-        public IndexModel(ICatalogTypeRepositoryService  catalogTypeService)
+        public IndexModel(ICatalogTypeService  catalogTypeService)
         {
             this.catalogTypeService = catalogTypeService;
             CatalogType = new List<CatalogTypeListDto>();

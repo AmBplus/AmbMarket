@@ -8,9 +8,9 @@ namespace Admin.Endpoint.Pages.CatalogType
 {
     public class EditModel : PageModel
     {
-        private readonly ICatalogTypeRepositoryService catalogTypeService;
+        private readonly ICatalogTypeService catalogTypeService;
 
-        public EditModel(ICatalogTypeRepositoryService catalogTypeService)
+        public EditModel(ICatalogTypeService catalogTypeService)
         {
             this.catalogTypeService = catalogTypeService;
         }

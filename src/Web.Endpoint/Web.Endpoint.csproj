@@ -20,6 +20,11 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ambMarket.Infrastructure\ambMarket.Infrastructure.csproj" />
+    <ProjectReference Include="..\Shared.AspCore\Shared.AspCore.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Controllers\" />
   </ItemGroup>
 
 </Project>

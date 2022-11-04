@@ -32,15 +32,14 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ambMarket.Persistence\ambMarket.Persistence.csproj" />
+    <ProjectReference Include="..\Shared.AspCore\Shared.AspCore.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ConfigurationServices\Cookie\" />
     <Folder Include="ConfigurationServices\DbConfig\" />
     <Folder Include="ConfigurationServices\Filter\" />
     <Folder Include="ConfigurationServices\AdminService\" />
     <Folder Include="ConfigurationServices\WebService\" />
-    <Folder Include="ConfigurationServices\Repository\" />
     <Folder Include="Utilities\UriCompose\" />
   </ItemGroup>
 

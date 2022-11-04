@@ -35,20 +35,37 @@ public class BasketItem : BaseEntityWithId<long>
 
     #region Methods
 
-    public void IncreaseQuantity(int quantity)
+    public bool IncreaseQuantity(int quantity)
     {
+        if (quantity > CatalogItem.AvailabeStock)
+        {
+            throw new ArgumentOutOfRangeException("تعداد نمیتواند بشتر از موجودی باشد");
+        }
         Quantity += quantity;
+        return true;
     }
-
     public bool DecreaseQuantity(int quantity)
     {
         if (Quantity - quantity < 0)
         {
-            throw new ArgumentOutOfRangeException("قیمت نمیتواند کمتر از صفر باشد");
+            throw new ArgumentOutOfRangeException("تعداد نمیتواند کمتر از صفر باشد");
         }
         Quantity -= quantity;
         return true;
     }
+    public bool SetQuantity(int quantity)
+    {
+        if ( quantity <= 0)
+        {
+            throw new ArgumentOutOfRangeException("تعداد نمیتواند کمتر از صفر یا صفر باشد");
+        }
 
+        if (quantity > CatalogItem.AvailabeStock)
+        {
+            throw new ArgumentOutOfRangeException("تعداد نمیتواند بشتر از موجودی باشد");
+        }
+        Quantity = quantity;
+        return true;
+    }
     #endregion /Methods
 }

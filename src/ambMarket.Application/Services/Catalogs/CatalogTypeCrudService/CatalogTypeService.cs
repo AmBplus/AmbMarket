@@ -8,10 +8,10 @@ using Shared.Resources;
 
 namespace ambMarket.Application.Services.Catalogs.CatalogTypeCrudService;
 
-public class CatalogTypeRepositoryService : ICatalogTypeRepositoryService
+public class CatalogTypeService : ICatalogTypeService
 {
     private IMarketDbContext Context { get; }
-    public CatalogTypeRepositoryService(IMarketDbContext context)
+    public CatalogTypeService(IMarketDbContext context)
     {
         Context = context;
     }

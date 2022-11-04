@@ -1,14 +1,15 @@
 using ambMarket.Infrastructure.Hubs;
-using ambMarket.Infrastructure.Hubs;
-using ambMarket.Infrastructure.Middleware;
 using ambMarket.Infrastructure.Utilities;
+using Web.Endpoint.Infrastructure.WebUtility;
 
 var builder = WebApplication.CreateBuilder(args);
 // WireUp Infrastructure Services
 builder.Services.WireUpInfrastructureServices(builder.Configuration);
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddControllers();
 
+builder.Services.AddSingleton<WebEndpointUtility>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -27,6 +28,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapRazorPages();
+app.MapControllers();
 //app.UseSetVisitorId();
 app.MapHub<OnlineVisitor>("/OnlineVisitor");
 app.Run();

@@ -8,9 +8,9 @@ namespace Admin.Endpoint.Pages.CatalogBrand
 {
     public class DeleteModel : PageModel
     {
-        private readonly ICatalogBrandRepositoryService catalogBrandService;
+        private readonly ICatalogBrandService catalogBrandService;
 
-        public DeleteModel(ICatalogBrandRepositoryService catalogBrandService)
+        public DeleteModel(ICatalogBrandService catalogBrandService)
         {
             this.catalogBrandService = catalogBrandService;
         }

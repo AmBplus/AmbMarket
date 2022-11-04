@@ -5,9 +5,9 @@ namespace Admin.Endpoint.Pages.CatalogBrand
 {
     public class IndexModel : PageModel
     {
-        private readonly ICatalogBrandRepositoryService catalogBrandService;
+        private readonly ICatalogBrandService catalogBrandService;
 
-        public IndexModel(ICatalogBrandRepositoryService  catalogBrandService)
+        public IndexModel(ICatalogBrandService  catalogBrandService)
         {
             this.catalogBrandService = catalogBrandService;
             CatalogBrand = new List<CatalogBrandDto>();

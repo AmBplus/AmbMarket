@@ -4,7 +4,7 @@ namespace Shared.AspCore.Utility
 {
     public static class ClaimUtility
     {
-        public static long? GetUserId(this ClaimsPrincipal User)
+        public static string? GetUserId(this ClaimsPrincipal User)
         {
             try
             {
@@ -12,7 +12,7 @@ namespace Shared.AspCore.Utility
 
                 if (claimsIdentity.FindFirst(ClaimTypes.NameIdentifier) != null)
                 {
-                    long userId = long.Parse(claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value);
+                    string userId = (claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value);
                     return userId;
                 }
                 else

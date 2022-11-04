@@ -76,6 +76,14 @@ public class ResultDto<T>
             Message = message,
         };
     }
+    public static ResultDto<T> BuildFailedResult()
+    {
+        return new ResultDto<T>()
+        {
+            Message = new List<string>() {  },
+            IsSuccess = false,
+        };
+    }
     public static ResultDto<T> BuildFailedResult(string message)
     {
         return new ResultDto<T>()

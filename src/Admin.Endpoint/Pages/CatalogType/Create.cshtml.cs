@@ -8,9 +8,9 @@ namespace Admin.Endpoint.Pages.CatalogType
 {
     public class CreateModel : PageModel
     {
-        private readonly ICatalogTypeRepositoryService catalogTypeService;
+        private readonly ICatalogTypeService catalogTypeService;
 
-        public CreateModel(ICatalogTypeRepositoryService catalogTypeService)
+        public CreateModel(ICatalogTypeService catalogTypeService)
         {
             this.catalogTypeService = catalogTypeService;
         }

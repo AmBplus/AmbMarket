@@ -2,7 +2,7 @@
 
 namespace ambMarket.Application.Services.Catalogs.CatalogBrandCrudService;
 
-public interface ICatalogBrandRepositoryService
+public interface ICatalogBrandService
 {
     Task<ResultDto<List<CatalogBrandDto>>> GetAsync();
     Task<ResultDto<CatalogBrandDto>> GetAsync(int id);

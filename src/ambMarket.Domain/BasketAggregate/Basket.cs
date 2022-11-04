@@ -22,4 +22,10 @@ public class Basket : BaseEntityWithId<long>
         var basketItem = Items.SingleOrDefault(x => x.CatalogItemId == catalogItemId);
         basketItem.IncreaseQuantity(quantity);
     }
+    public void RemoveBasketItem(long itemId)
+    {
+        var basketItem = Items.Where(x => x.Id == itemId).SingleOrDefault();
+        if(basketItem != null)
+        Items.Remove(basketItem);
+    }
 }

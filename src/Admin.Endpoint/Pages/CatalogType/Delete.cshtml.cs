@@ -9,9 +9,9 @@ namespace Admin.Endpoint.Pages.CatalogType
 {
     public class DeleteModel : PageModel
     {
-        private readonly ICatalogTypeRepositoryService catalogTypeService;
+        private readonly ICatalogTypeService catalogTypeService;
 
-        public DeleteModel(ICatalogTypeRepositoryService catalogTypeService)
+        public DeleteModel(ICatalogTypeService catalogTypeService)
         {
             this.catalogTypeService = catalogTypeService;
         }

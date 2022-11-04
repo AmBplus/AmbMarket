@@ -6,16 +6,16 @@ using Shared;
 
 namespace ambMarket.Application.Services.VisitorOnlineRepository;
 
-public interface IVisitorOnlineRepositoryService
+public interface IVisitorOnlineService
 {
     Task ConnectUserAsync(string clientId);
     Task DisconnectUserAsync(string clientId);
     Task<int> GetVisitorOnlineCountAsync();
 }
 
-public class VisitorOnlineRepositoryService : IVisitorOnlineRepositoryService
+public class VisitorOnlineService : IVisitorOnlineService
 {
-    public VisitorOnlineRepositoryService(IMongoDbContext<OnlineVisitor> visitorOnlineCollection)
+    public VisitorOnlineService(IMongoDbContext<OnlineVisitor> visitorOnlineCollection)
     {
         VisitorOnlineCollection = visitorOnlineCollection.GetCollection();
     }

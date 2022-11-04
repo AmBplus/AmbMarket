@@ -3,4 +3,5 @@
 public class ApplicationSettings
 {
     public string CatalogImageUriSrc { get; set; }
+    public int ExpireBuyerIdCookieTimeBySeconds { get; set; }
 }

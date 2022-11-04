@@ -6,23 +6,23 @@ namespace ambMarket.Infrastructure.Hubs;
 
 public class OnlineVisitor : Hub
 {
-    public OnlineVisitor(IVisitorOnlineRepositoryService onlineVisitorRepository)
+    public OnlineVisitor(IVisitorOnlineService onlineVisitorService)
     {
-        OnlineVisitorRepository = onlineVisitorRepository;
+        OnlineVisitorService = onlineVisitorService;
     }
 
-    private IVisitorOnlineRepositoryService OnlineVisitorRepository { get; }
+    private IVisitorOnlineService OnlineVisitorService { get; }
     public override async Task OnConnectedAsync()
     {
         var visitorId = Context.GetHttpContext().GetVisitorId();
-        await OnlineVisitorRepository.ConnectUserAsync(visitorId);
+        await OnlineVisitorService.ConnectUserAsync(visitorId);
         await base.OnConnectedAsync();
     }
 
     public override async Task OnDisconnectedAsync(Exception? exception)
     {
         var visitorId = Context.GetHttpContext().GetVisitorId();
-        await OnlineVisitorRepository.DisconnectUserAsync(visitorId);
+        await OnlineVisitorService.DisconnectUserAsync(visitorId);
         await base.OnDisconnectedAsync(exception);
     }
 }
